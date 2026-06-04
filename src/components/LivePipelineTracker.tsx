@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import type { PipelineTrace, StageTrace } from '../types/index';
 import {
   Brain, Type, Anchor, Zap, HelpCircle, Shield, MessageSquare, Mail,
-  CheckCircle, XCircle, Loader2, AlertTriangle, RefreshCw, Clock, DollarSign, Hash
+  CheckCircle, XCircle, Loader2, AlertTriangle, RefreshCw, Clock, DollarSign
 } from 'lucide-react';
 
 interface Props {
@@ -122,7 +122,7 @@ function StageCard({ stage, isLatest }: { stage: StageTrace; isLatest: boolean }
 }
 
 export default function LivePipelineTracker({ trace, isRunning }: Props) {
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<<HTMLDivElement>(null);
   const latestStage = trace?.stages[trace.stages.length - 1];
 
   useEffect(() => {

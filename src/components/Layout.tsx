@@ -1,7 +1,7 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import {
-  Mail, PlusCircle, Home, FileText, BarChart3, Zap,
+  Mail, PlusCircle, Home, BarChart3, Zap,
   ChevronRight, Sun, Moon, Upload, LogOut
 } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';

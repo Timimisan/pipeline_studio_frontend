@@ -44,7 +44,7 @@ function InputGroup({ label, children, icon: Icon }: { label: string; children: 
 export default function BatchImportPage() {
   const { state } = useApp();
   const navigate = useNavigate();
-  const fileRef = useRef<HTMLInputElement>(null);
+  const fileRef = useRef<<HTMLInputElement>(null);
 
   // Source selection
   const [source, setSource] = useState<'csv' | 'google_sheets' | 'airtable' | null>(null);
@@ -64,7 +64,7 @@ export default function BatchImportPage() {
   const [mappingJson, setMappingJson] = useState('');
 
   // CRM state
-  const [crmConfig, setCrmConfig] = useState('');
+  const [crmConfig] = useState('');
   const [crmConfigJson, setCrmConfigJson] = useState('');
 
   // Results / loading
@@ -74,7 +74,7 @@ export default function BatchImportPage() {
 
   const problems = state.problems;
 
-  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileSelect = (e: React.ChangeEvent<<HTMLInputElement>) => {
     const file = e.target.files?.[0] ?? null;
     if (file && !file.name.endsWith('.csv')) {
       setError('Please upload a .csv file');

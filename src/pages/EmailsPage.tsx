@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
-import { Mail, ArrowRight, Calendar, Search, Filter } from 'lucide-react';
+import { Mail, ArrowRight, Calendar, Search } from 'lucide-react';
 import { useState } from 'react';
 
 export default function EmailsPage() {

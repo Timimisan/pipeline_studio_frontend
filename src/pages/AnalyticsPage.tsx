@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
 import { getAnalytics, getDailyAnalytics } from '../api/client';
 import { useApp } from '../context/AppContext';
-import type { AnalyticsData, DailyAnalytics, EmailAnalytics } from '../types/index';
+import type { AnalyticsData, DailyAnalytics } from '../types/index';
 import {
   Activity, TrendingUp, AlertTriangle, CheckCircle,
-  Clock, DollarSign, BarChart3, Zap, RefreshCw, Mail,
-  ChevronDown, ChevronUp
+  Clock, DollarSign, BarChart3, Zap, RefreshCw
 } from 'lucide-react';
 
 interface MetricCardProps {
@@ -140,10 +139,10 @@ const EMPTY_DAILY: DailyAnalytics[] = [
 ];
 
 export default function AnalyticsPage() {
-  const { state, syncWithBackend } = useApp();
+  const { syncWithBackend } = useApp();
 
   // Main analytics
-  const [data, setData] = useState<AnalyticsData | null>(null);
+  const [data, setData] = useState<<AnalyticsData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
@@ -151,9 +150,6 @@ export default function AnalyticsPage() {
   const [dailyData, setDailyData] = useState<DailyAnalytics[]>(EMPTY_DAILY);
   const [dailyLoading, setDailyLoading] = useState(true);
   const [dailyError, setDailyError] = useState('');
-
-  // Per-context email analytics
-  const [selectedEmail, setSelectedEmail] = useState<string | null>(null);
 
   // Fetch main analytics
   useEffect(() => {

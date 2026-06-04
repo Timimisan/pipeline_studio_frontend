@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { useApp } from '../context/AppContext';
 import ContextForm from '../components/ContextForm';
 import PipelineRunner from '../components/PipelineRunner';
+import type { ProblemSnapshot, CreateProblemRequest } from '../types/index';
 import { FileText, Plus, ChevronDown, ChevronUp, Clock, ArrowLeft, Building2, UserCog, ListChecks, Zap } from 'lucide-react';
 
 export default function ProblemDetailPage() {
@@ -11,7 +12,7 @@ export default function ProblemDetailPage() {
   const [showContextForm, setShowContextForm] = useState(false);
 
   const problem = state.problems.find(p => String(p?.problem_id) === id);
-  const contexts = state.contexts.filter(c => String(c?.problem_id ?? c?.problemId ?? '') === String(id));
+  const contexts = state.contexts.filter(c => String(c?.problem_id ?? '') === String(id));
 
   if (!state.hydrated) {
     return (
@@ -40,8 +41,8 @@ export default function ProblemDetailPage() {
     );
   }
 
-  const snapshot = problem.snapshot || {};
-  const fullData = problem.fullData || {};
+  const snapshot = (problem.snapshot || {}) as ProblemSnapshot;
+  const fullData = (problem.fullData || {}) as CreateProblemRequest;
 
   const detailFields = [
     { label: 'Core Problem', value: fullData.core_problem },

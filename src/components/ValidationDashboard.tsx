@@ -1,5 +1,5 @@
 import type { ValidationScores, AttemptCounts, PipelineStage } from '../types/index';
-import { BarChart3, AlertTriangle, CheckCircle2, TrendingUp, Activity } from 'lucide-react';
+import { BarChart3, AlertTriangle, CheckCircle2, Activity } from 'lucide-react';
 
 interface Props {
   scores?: ValidationScores;
@@ -16,7 +16,7 @@ const stageConfig: { key: PipelineStage; label: string; color: string; gradient:
   { key: 'cta', label: 'CTA', color: 'bg-cyan-500', gradient: 'from-cyan-500 to-sky-500' },
 ];
 
-function ScoreBar({ label, value, color }: { label: string; value: number; color: string }) {
+function ScoreBar({ label, value }: { label: string; value: number }) {
   const percentage = Math.round((value || 0) * 100);
   let statusColor = 'text-emerald-400';
   let StatusIcon = CheckCircle2;
@@ -107,9 +107,8 @@ export default function ValidationDashboard({ scores = {}, attempts = {} }: Prop
                   Object.entries(latestScores).map(([metric, value]) => (
                     <ScoreBar
                       key={metric}
-                      label={metric.replace(/_/g, ' ').replace(/\w/g, l => l.toUpperCase())}
+                      label={metric.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
                       value={value as number}
-                      color={stage.color}
                     />
                   ))
                 ) : (

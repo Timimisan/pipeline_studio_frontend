@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { createContext } from '../api/client';
 import { useApp } from '../context/AppContext';
 import type { CreateContextRequest } from '../types/index';
-import { X, Plus, Save, AlertCircle, Building2, Users, UserCog, FileText, ArrowLeft } from 'lucide-react';
+import { X, Plus, Save, AlertCircle, Building2, Users, UserCog, FileText } from 'lucide-react';
 
 interface Props {
   problemId: string;
@@ -10,7 +10,7 @@ interface Props {
 }
 
 export default function ContextForm({ problemId, onSuccess }: Props) {
-  const [form, setForm] = useState<CreateContextRequest>({
+  const [form, setForm] = useState<<CreateContextRequest>({
     problem_id: problemId,
     industry: '',
     company_size: '',
