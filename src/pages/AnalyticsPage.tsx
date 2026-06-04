@@ -142,7 +142,7 @@ export default function AnalyticsPage() {
   const { syncWithBackend } = useApp();
 
   // Main analytics
-  const [data, setData] = useState<<AnalyticsData | null>(null);
+  const [data, setData] = useState<AnalyticsData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 

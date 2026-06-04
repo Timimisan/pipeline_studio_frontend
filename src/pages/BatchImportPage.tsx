@@ -74,7 +74,7 @@ export default function BatchImportPage() {
 
   const problems = state.problems;
 
-  const handleFileSelect = (e: React.ChangeEvent<<HTMLInputElement>) => {
+  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] ?? null;
     if (file && !file.name.endsWith('.csv')) {
       setError('Please upload a .csv file');
