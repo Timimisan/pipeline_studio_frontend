@@ -15,6 +15,21 @@ import type {
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
 // ============================================================
+// AUTH HEADERS HELPER
+// ============================================================
+
+function getAuthHeaders(): HeadersInit {
+  const token = localStorage.getItem('token');
+  const headers: HeadersInit = {
+    'Content-Type': 'application/json',
+  };
+  if (token) {
+    headers['Authorization'] = `Bearer ${token}`;
+  }
+  return headers;
+}
+
+// ============================================================
 // ERROR MAPPING (fastapi-users error codes)
 // ============================================================
 
@@ -175,11 +190,20 @@ export async function logout(): Promise<void> {
   if (!res.ok) {
     console.warn('[client.logout] Logout returned non-OK status:', res.status);
   }
+
+  // Clear token from localStorage
+  localStorage.removeItem('token');
+  localStorage.removeItem('user');
 }
 
 export async function getCurrentUser(): Promise<User> {
+  const token = localStorage.getItem('token');
+  const headers: HeadersInit = {};
+  if (token) headers['Authorization'] = `Bearer ${token}`;
+
   const res = await fetch(`${API_BASE}/users/me`, {
     credentials: 'include',
+    headers,
   });
 
   if (!res.ok) {
@@ -201,7 +225,7 @@ async function api<T>(endpoint: string, options?: RequestInit): Promise<T> {
   const res = await fetch(url, {
     credentials: 'include',
     headers: {
-      'Content-Type': 'application/json',
+      ...getAuthHeaders(),
       ...(options?.headers || {}),
     },
     ...options,
@@ -260,7 +284,7 @@ export const runPipelineStream = (
   fetch(`${API_BASE}/api/run-stream`, {
     method: 'POST',
     credentials: 'include',
-    headers: { 'Content-Type': 'application/json' },
+    headers: getAuthHeaders(),
     body: JSON.stringify(data),
     signal: abortController.signal,
   }).then(async (response) => {
