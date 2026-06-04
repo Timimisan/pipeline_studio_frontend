@@ -127,12 +127,6 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     }
   }, []);
 
-  // Wake up Hugging Face Space on app load
-  useEffect(() => {
-    const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000';
-    fetch(`${API_BASE}/`, { method: 'HEAD' }).catch(() => {});
-  }, []);
-
   // Persist to localStorage on change
   useEffect(() => {
     if (state.hydrated) {
