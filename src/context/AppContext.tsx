@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useReducer, useEffect, useCallback } from 'react';
 import { getProblems, getContexts } from '../api/client';
-import type { Problem, Context, GeneratedEmail } from '../types';
+import type { Problem, Context, GeneratedEmail } from '../types/index';
 
 interface AppState {
   problems: Problem[];

@@ -10,7 +10,7 @@ import type {
   EmailAnalytics,
   Problem,
   Context,
-} from '../types';
+} from '../type/index';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 

@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import type { PipelineTrace, StageTrace } from '../types';
+import type { PipelineTrace, StageTrace } from '../types/index';
 import {
   Brain, Type, Anchor, Zap, HelpCircle, Shield, MessageSquare, Mail,
   CheckCircle, XCircle, Loader2, AlertTriangle, RefreshCw, Clock, DollarSign, Hash

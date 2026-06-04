@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { createContext } from '../api/client';
 import { useApp } from '../context/AppContext';
-import type { CreateContextRequest } from '../types';
+import type { CreateContextRequest } from '../types/index';
 import { X, Plus, Save, AlertCircle, Building2, Users, UserCog, FileText, ArrowLeft } from 'lucide-react';
 
 interface Props {

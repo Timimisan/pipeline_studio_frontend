@@ -1,4 +1,4 @@
-import type { ValidationScores, AttemptCounts, PipelineStage } from '../types';
+import type { ValidationScores, AttemptCounts, PipelineStage } from '../types/index';
 import { BarChart3, AlertTriangle, CheckCircle2, TrendingUp, Activity } from 'lucide-react';
 
 interface Props {

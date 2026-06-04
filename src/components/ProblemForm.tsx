@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createProblem } from '../api/client';
 import { useApp } from '../context/AppContext';
-import type { CreateProblemRequest } from '../types';
+import type { CreateProblemRequest } from '../types/index';
 import { Save, AlertCircle, Sparkles, Brain, Zap, GitBranch, Target, Lightbulb, ArrowLeft } from 'lucide-react';
 
 const initialForm: CreateProblemRequest = {

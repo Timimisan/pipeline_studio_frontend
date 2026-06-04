@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { runPipelineStream } from '../api/client';
 import { useApp } from '../context/AppContext';
-import type { Context, PipelineResult, PipelineTrace } from '../types';
+import type { Context, PipelineResult, PipelineTrace } from '../types/index';
 import LivePipelineTracker from './LivePipelineTracker';
 import EmailViewer from './EmailViewer';
 import ValidationDashboard from './ValidationDashboard';

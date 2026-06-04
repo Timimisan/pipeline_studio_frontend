@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from '../types/index';
 import { Copy, Check, Mail, Download } from 'lucide-react';
 
 interface Props {

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getAnalytics, getDailyAnalytics } from '../api/client';
 import { useApp } from '../context/AppContext';
-import type { AnalyticsData, DailyAnalytics, EmailAnalytics } from '../types';
+import type { AnalyticsData, DailyAnalytics, EmailAnalytics } from '../types/index';
 import {
   Activity, TrendingUp, AlertTriangle, CheckCircle,
   Clock, DollarSign, BarChart3, Zap, RefreshCw, Mail,
