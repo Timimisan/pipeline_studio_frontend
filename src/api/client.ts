@@ -223,7 +223,7 @@ export async function getCurrentUser(): Promise<User> {
   } catch (err: any) {
     // OAuth cookie race condition: retry once after a short delay
     if (err.message === 'UNAUTHORIZED') {
-      await new Promise(r => setTimeout(r, 500));
+      await new Promise(r => setTimeout(r, 1000));
       return fetchUser();
     }
     throw err;
