@@ -37,8 +37,6 @@ function reducer(state: AppState, action: Action): AppState {
     case 'LOAD_STATE':
       return { ...action.payload, hydrated: true };
     case 'SYNC_STATE': {
-      // Merge backend data with frontend cache, preferring backend for problems/contexts
-      // but keeping emails (since backend doesn't have a list endpoint for them)
       const backendProblems = action.payload.problems.map(normalizeProblem);
       const backendContexts = action.payload.contexts.map(normalizeContext);
 
@@ -57,10 +55,7 @@ function reducer(state: AppState, action: Action): AppState {
   }
 }
 
-// Normalize backend Problem shape to frontend shape
 function normalizeProblem(p: Problem): Problem {
-  // Backend GET /problems/{id} returns { id, problem_name, system, ... }
-  // Frontend expects { problem_id, snapshot: { problem_name, system }, fullData, createdAt }
   return {
     ...p,
     problem_id: p.problem_id ?? p.id,
@@ -86,7 +81,6 @@ function normalizeProblem(p: Problem): Problem {
   };
 }
 
-// Normalize backend Context shape to frontend shape
 function normalizeContext(c: Context): Context {
   return {
     ...c,
@@ -131,6 +125,12 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     } else {
       dispatch({ type: 'LOAD_STATE', payload: initialState });
     }
+  }, []);
+
+  // Wake up Hugging Face Space on app load
+  useEffect(() => {
+    const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+    fetch(`${API_BASE}/`, { method: 'HEAD' }).catch(() => {});
   }, []);
 
   // Persist to localStorage on change
