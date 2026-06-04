@@ -139,7 +139,7 @@ export default function BatchImportPage() {
         form.append('column_mapping', JSON.stringify(buildMapping()));
         form.append('file', csvFile);
 
-        const res = await fetch(`${API_BASE}/import/csv`, {
+        const res = await fetch(`${API_BASE}/api/import/csv`, {
           method: 'POST',
           body: form,
         });
@@ -152,7 +152,7 @@ export default function BatchImportPage() {
         form.append('crm_config', JSON.stringify(buildCrmConfig()));
         form.append('column_mapping', JSON.stringify(buildMapping()));
 
-        const res = await fetch(`${API_BASE}/import/crm`, {
+        const res = await fetch(`${API_BASE}/api/import/crm`, {
           method: 'POST',
           body: form,
         });
