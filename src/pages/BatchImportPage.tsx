@@ -44,7 +44,7 @@ function InputGroup({ label, children, icon: Icon }: { label: string; children: 
 export default function BatchImportPage() {
   const { state } = useApp();
   const navigate = useNavigate();
-  const fileRef = useRef<<HTMLInputElement>(null);
+  const fileRef = useRef<HTMLInputElement>(null);
 
   // Source selection
   const [source, setSource] = useState<'csv' | 'google_sheets' | 'airtable' | null>(null);

@@ -43,7 +43,7 @@ export default function ProblemForm() {
         createdAt: new Date().toISOString(),
         fullData: form,
       };
-      dispatch({ type: 'ADD_PROBLEM', payload: problem });
+      dispatch({ type: 'ADD_PROBLEM', payload: problem as any});
       navigate(`/problems/${result.problem_id}`);
     } catch (err: any) {
       setError(err.message);

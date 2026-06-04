@@ -10,7 +10,7 @@ interface Props {
 }
 
 export default function ContextForm({ problemId, onSuccess }: Props) {
-  const [form, setForm] = useState<<CreateContextRequest>({
+  const [form, setForm] = useState<CreateContextRequest>({
     problem_id: problemId,
     industry: '',
     company_size: '',
@@ -25,12 +25,12 @@ export default function ContextForm({ problemId, onSuccess }: Props) {
 
   const addConstraint = () => {
     if (!constraintInput.trim()) return;
-    setForm(prev => ({ ...prev, constraints: [...prev.constraints, constraintInput.trim()] }));
+    setForm((prev: CreateContextRequest) => ({ ...prev, constraints: [...prev.constraints, constraintInput.trim()] }));
     setConstraintInput('');
   };
 
   const removeConstraint = (idx: number) => {
-    setForm(prev => ({ ...prev, constraints: prev.constraints.filter((_, i) => i !== idx) }));
+    setForm((prev: CreateContextRequest) => ({ ...prev, constraints: prev.constraints.filter((_: string, i: number) => i !== idx) }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -45,7 +45,7 @@ export default function ContextForm({ problemId, onSuccess }: Props) {
         problem_id: problemId,
         createdAt: new Date().toISOString(),
       };
-      dispatch({ type: 'ADD_CONTEXT', payload: context });
+      dispatch({ type: 'ADD_CONTEXT', payload: context as any });
       onSuccess?.();
       setForm({ problem_id: problemId, industry: '', company_size: '', decision_actor: '', extra: '', constraints: [] });
     } catch (err: any) {
@@ -57,9 +57,7 @@ export default function ContextForm({ problemId, onSuccess }: Props) {
 
   return (
     <div className="max-w-xl mx-auto">
-      {/* Premium Form Card */}
       <div className="form-card">
-        {/* Card Header */}
         <div className="form-card-header">
           <div className="flex items-center gap-4 mb-2">
             <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-500 to-orange-600 flex items-center justify-center shadow-lg shadow-amber-500/20">
@@ -72,7 +70,6 @@ export default function ContextForm({ problemId, onSuccess }: Props) {
           </div>
         </div>
 
-        {/* Error Alert */}
         {error && (
           <div className="mx-8 mt-4">
             <div className="alert-premium alert-error">
@@ -82,7 +79,6 @@ export default function ContextForm({ problemId, onSuccess }: Props) {
           </div>
         )}
 
-        {/* Form Body */}
         <div className="form-card-body">
           <form onSubmit={handleSubmit} className="space-y-5">
             <div className="grid grid-cols-2 gap-4">
@@ -93,7 +89,7 @@ export default function ContextForm({ problemId, onSuccess }: Props) {
                   <input
                     className="input-premium pl-10"
                     value={form.industry}
-                    onChange={e => setForm(prev => ({ ...prev, industry: e.target.value }))}
+                    onChange={e => setForm((prev: CreateContextRequest) => ({ ...prev, industry: e.target.value }))}
                     placeholder="e.g. SaaS"
                     required
                   />
@@ -106,7 +102,7 @@ export default function ContextForm({ problemId, onSuccess }: Props) {
                   <input
                     className="input-premium pl-10"
                     value={form.company_size}
-                    onChange={e => setForm(prev => ({ ...prev, company_size: e.target.value }))}
+                    onChange={e => setForm((prev: CreateContextRequest) => ({ ...prev, company_size: e.target.value }))}
                     placeholder="e.g. 50-200 employees"
                     required
                   />
@@ -121,7 +117,7 @@ export default function ContextForm({ problemId, onSuccess }: Props) {
                 <input
                   className="input-premium pl-10"
                   value={form.decision_actor}
-                  onChange={e => setForm(prev => ({ ...prev, decision_actor: e.target.value }))}
+                  onChange={e => setForm((prev: CreateContextRequest) => ({ ...prev, decision_actor: e.target.value }))}
                   placeholder="e.g. Head of Growth"
                   required
                 />
@@ -135,7 +131,7 @@ export default function ContextForm({ problemId, onSuccess }: Props) {
                 <textarea
                   className="input-premium pl-10"
                   value={form.extra}
-                  onChange={e => setForm(prev => ({ ...prev, extra: e.target.value }))}
+                  onChange={e => setForm((prev: CreateContextRequest) => ({ ...prev, extra: e.target.value }))}
                   placeholder="Any additional context..."
                   rows={3}
                 />
@@ -157,7 +153,7 @@ export default function ContextForm({ problemId, onSuccess }: Props) {
                 </button>
               </div>
               <div className="flex flex-wrap gap-2">
-                {form.constraints.map((c, i) => (
+                {form.constraints.map((c: string, i: number) => (
                   <span key={i} className="constraint-tag">
                     {c}
                     <button type="button" onClick={() => removeConstraint(i)}>
@@ -173,7 +169,6 @@ export default function ContextForm({ problemId, onSuccess }: Props) {
           </form>
         </div>
 
-        {/* Card Footer */}
         <div className="form-card-footer">
           <button
             type="button"

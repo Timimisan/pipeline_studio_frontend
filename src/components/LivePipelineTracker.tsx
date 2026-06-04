@@ -122,7 +122,7 @@ function StageCard({ stage, isLatest }: { stage: StageTrace; isLatest: boolean }
 }
 
 export default function LivePipelineTracker({ trace, isRunning }: Props) {
-  const scrollRef = useRef<<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
   const latestStage = trace?.stages[trace.stages.length - 1];
 
   useEffect(() => {
