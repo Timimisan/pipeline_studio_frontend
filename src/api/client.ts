@@ -202,19 +202,32 @@ export async function getCurrentUser(): Promise<User> {
   const headers: HeadersInit = {};
   if (token) headers['Authorization'] = `Bearer ${token}`;
 
-  const res = await fetch(`${API_BASE}/users/me`, {
-    credentials: 'include',
-    headers,
-  });
+  async function fetchUser(): Promise<User> {
+    const res = await fetch(`${API_BASE}/users/me`, {
+      credentials: 'include',
+      headers,
+    });
 
-  if (!res.ok) {
-    if (res.status === 401) {
-      throw new Error('UNAUTHORIZED');
+    if (!res.ok) {
+      if (res.status === 401) {
+        throw new Error('UNAUTHORIZED');
+      }
+      throw new Error(`Failed to fetch user (HTTP ${res.status})`);
     }
-    throw new Error(`Failed to fetch user (HTTP ${res.status})`);
+
+    return res.json();
   }
 
-  return res.json();
+  try {
+    return await fetchUser();
+  } catch (err: any) {
+    // OAuth cookie race condition: retry once after a short delay
+    if (err.message === 'UNAUTHORIZED') {
+      await new Promise(r => setTimeout(r, 500));
+      return fetchUser();
+    }
+    throw err;
+  }
 }
 
 // ============================================================
