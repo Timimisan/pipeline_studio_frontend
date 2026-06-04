@@ -237,12 +237,14 @@ async function api<T>(endpoint: string, options?: RequestInit): Promise<T> {
   }
   if (!res.ok) {
     let errorText = `API Error (${res.status})`;
-    try {
-      const errorData = await res.json();
-      errorText = parseErrorResponse(errorData, errorText);
-    } catch {
-      const text = await res.text();
-      if (text) errorText = text;
+    const text = await res.text();
+    if (text) {
+      try {
+        const errorData = JSON.parse(text);
+        errorText = parseErrorResponse(errorData, errorText);
+      } catch {
+        errorText = text;
+      }
     }
     throw new Error(errorText);
   }
